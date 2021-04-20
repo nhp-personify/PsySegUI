@@ -23,7 +23,7 @@
 	padding: 5px;
 	justify-content: center;
 	margin: 0.5%;
-	min-width: 200px;
+	min-width: 250px;
 }
 
 .setting label {
@@ -57,7 +57,7 @@
 	border: 2px solid black;
 	border-radius: 5px;
 	margin: 0.5%;
-	min-width: 350px;
+	min-width: 400px;
 }
 
 .effect button {
@@ -89,7 +89,7 @@
 	padding: 5px;
 	justify-content: center;
 	margin: 0.5%;
-	min-width: 100px;
+	min-width: 75px;
 }
 
 .information label {
