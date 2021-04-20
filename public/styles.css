@@ -22,8 +22,9 @@
 	border-radius: 5px;
 	padding: 5px;
 	justify-content: center;
-	margin: 0.5%;
-	min-width: 250px;
+	margin: 5px;
+	min-width: 200px;
+	order: 1;
 }
 
 .setting label {
@@ -56,8 +57,9 @@
 	width: 45%;
 	border: 2px solid black;
 	border-radius: 5px;
-	margin: 0.5%;
-	min-width: 400px;
+	margin: 5px;
+	min-width: 350px;
+	order: 3;
 }
 
 .effect button {
@@ -83,13 +85,14 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	width: 7%;
+	width: 10%;
 	border: 2px solid black;
 	border-radius: 5px;
 	padding: 5px;
 	justify-content: center;
-	margin: 0.5%;
+	margin: 5px;
 	min-width: 75px;
+	order: 2;
 }
 
 .information label {
@@ -101,4 +104,30 @@
 .information p {
 	width: 50%;
 	margin: 2px 0 2px 0;
+}
+
+/*=================*/
+/* DISPLAY SETTING */
+/*=================*/
+.display {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0.5%;
+}
+
+.display canvas {
+	width: 480px;
+	height: 360px;
+	border: 2px solid black;
+	margin: 5px;
+}
+
+/*================*/
+/* FOOTER SETTING */
+/*================*/
+footer {
+	display: flex;
+	justify-content: space-between;
 }
