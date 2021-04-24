@@ -3,9 +3,155 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>PsySeg JS Demo</title>
+		<link rel="stylesheet" href="styles.css">
 	</head>
-	<body id="main">
-		<script src="./index.js"></script>
+	<body>
+		<main>
+			<!-- Header contains brief introduction about project & company -->
+			<header class="header">
+				<h1>PsySeg JS Demo</h1>
+			</header>
+			
+			<!-- SECTION 1: controller of web-app, including: 
+			+ Initial Setting: FPS, Frame Size, Processing Mode, Backend
+			+ Effect Setting: blurring, overlay background ...
+			-->
+			<section class="controller">
+			
+				<!-- ARTICLE 1.1: Initial Setting of Web-Apps, including:
+				+ FPS Control: default is 30 frame/s
+				+ Frame Size: 3 fixed size (480x360, 640x480, 1080x720)
+				+ Processing Mode: Full, DNN-only, Ultra Lite ...
+				+ Colorspace: RGB, YUV, HSV ...
+				+ Backend: processing by CPU or GPU
+				-->
+				<article class="setting">
+				
+					<!-- DROPDOWN 1.1: Set FPS 15/24/30 -->
+					<label for="set_fps">FPS: </label>
+					<select name="set_fps" id="set_fps">
+						<option value="24">24</option>
+						<option value="15">15</option>
+						<option value="30">30</option>
+					</select>
+					
+					<!-- DROPDOWN 1.2: Set Frame Size (480x360, 640x480, 1080x720) -->
+					<label for="set_size">Frame Size: </label>
+					<select name="set_size" id="set_size">
+						<option value="small">480 x 360</option>
+						<option value="medium">640 x 480</option>
+						<option value="large">1080 x 720</option>
+					</select>
+					
+					<!-- DROPDOWN 1.3: Set Processing Mode (Full, DNN-only, Ultra Lite ...) -->
+					<label for="set_mode">Mode: </label>
+					<select name="set_mode" id="set_mode">
+						<option value="full">Full</option>
+						<option value="ultralite">Ultra Lite</option>
+						<option value="dnn">DNN only</option>
+					</select>
+					
+					<!-- DROPDOWN 1.4: Set Colorspace (RGB, YUV, HSV ...) -->
+					<label for="set_colorspace">Colorspace: </label>
+					<select name="set_colorspace" id="set_colorspace">
+						<option value="rgb">RGB</option>
+						<option value="i420">I420</option>
+						<option value="hsv">HSV</option>
+					</select>
+					
+					<!-- DROPDOWN 1.5: Set Backend (CPU or GPU) -->
+					<label for="set_backend">Backend: </label>
+					<select name="set_backend" id="set_backend">
+						<option value="cpu">CPU</option>
+						<option value="gpu">GPU</option>
+					</select>
+					
+					<!-- START button -->
+					<button id="start">Start</button>
+					
+				</article>
+				
+				<!-- ARTICLE 1.2: Effect Setting for Output Frame, including:
+				+ Blurring
+				+ Overlay Background
+				+ ...
+				-->
+				<article class="effect">					
+					<button id="blur">Blur</button>
+					<button id="overlay">Overlay BG</button>
+					<button id="chroma">Chroma Key</button>
+					<button id="aura">Color Aura</button>
+					<button id="o1">Others</button>
+					<button id="o2">Others</button>
+					<button id="o3">Others</button>
+					<button id="o4">Others</button>
+				</article>
+
+				<!-- ARTICLE 1.3: Brief Information for performance test, including:
+				+ CPU usage
+				+ GPU usage
+				+ Memory usage
+				+ Real FPS
+				-->
+				<article class="information">
+				
+					<!-- CPU usage (percentage) -->
+					<label for="show_cpu">CPU: </label>
+					<p name="show_cpu" id="show_cpu">0</p>
+					
+					<!-- GPU usage (percentage) -->
+					<label for="show_gpu">GPU: </label>
+					<p name="show_gpu" id="show_gpu">0</p>
+					
+					<!-- Memory usage (MB) -->
+					<label for="show_memory">Mem: </label>
+					<p name="show_memory" id="show_memory">0</p>
+					
+					<!-- Real FPS (frame/s) -->
+					<label for="show_fps">FPS: </label>
+					<p name="show_fps" id="show_fps">0</p>
+					
+				</article>
+				
+			</section>
+			
+			<!-- SECTION 2: Displaying (input, alpha mask, output) -->
+			<section class="display">
+			
+				<!-- ARTICLE 2.1: Input frame -->
+				<canvas id="input_frame">
+				
+				</canvas>
+				
+				<!-- ARTICLE 2.2: Alpha Mask -->
+				<canvas id="alpha_mask">
+				
+				</canvas>
+				
+				<!-- ARTICLE 2.3: Output frame -->
+				<canvas id="output_frame">
+				
+				</canvas>
+				
+			</section>
+			
+			<hr size="2" width="100%" align="left" color="black">
+
+			<!-- Footer contains additional information, such as: license, copyright ... -->
+			<footer class="footer">
+				<div class="copyright">
+					<img src="logo.png" />
+					<p style="font-weight:bold">&copy Personify 2021</p>
+				</div>
+				<div class="contact">
+					<p style="font-size:1.2rem"><strong>Contact Information</strong></p>
+					<p><strong>Website: </strong><a href="https://personifyinc.com/">personifyinc.com</a></p>
+					<p><strong>Address:</strong> Waseco Building, 10 Pho Quang street, Tan Bình District, Ho Chi Minh City, Vietnam</p>
+					<p><strong>Phone Number:</strong> 028 3811 5966</p>
+				</div>
+			</footer>
+		</main>
 	</body>
 </html>

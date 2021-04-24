@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/PsySegJS.js',
+  entry: './src/app.js',
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'index.js'
+    filename: 'bundle.js'
   },
   module: {
     rules: [
