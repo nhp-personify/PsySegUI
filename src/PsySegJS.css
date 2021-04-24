@@ -6,6 +6,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 /*=================*/
@@ -21,8 +22,9 @@
 	border-radius: 5px;
 	padding: 5px;
 	justify-content: center;
-	margin: 0.5%;
-	min-width: 150px;
+	margin: 5px;
+	min-width: 200px;
+	order: 1;
 }
 
 .setting label {
@@ -55,8 +57,9 @@
 	width: 45%;
 	border: 2px solid black;
 	border-radius: 5px;
-	margin: 0.5%;
-	min-width: 300px;
+	margin: 5px;
+	min-width: 350px;
+	order: 3;
 }
 
 .effect button {
@@ -70,8 +73,9 @@
 	font-size: 1rem;
 }
 
-.effect .blur_content {
-	display: none;
+.effect #overlay {
+	color: white;
+	background-color: green;
 }
 
 
@@ -82,13 +86,14 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	width: 7%;
+	width: 10%;
 	border: 2px solid black;
 	border-radius: 5px;
 	padding: 5px;
 	justify-content: center;
-	margin: 0.5%;
+	margin: 5px;
 	min-width: 100px;
+	order: 2;
 }
 
 .information label {
@@ -100,4 +105,50 @@
 .information p {
 	width: 50%;
 	margin: 2px 0 2px 0;
+}
+
+/*=================*/
+/* DISPLAY SETTING */
+/*=================*/
+.display {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0.5%;
+}
+
+.display canvas {
+	width: 480px;
+	height: 360px;
+	border: 2px solid black;
+	margin: 5px;
+}
+
+.display .display-input {
+    width: 480px;
+	height: 360px;
+    border: 2px solid black;
+	margin: 5px;
+    position: relative;
+}
+
+.display .display-input video {
+    width: 100%;
+	height: 100%;
+}
+
+.display .display-input .video-options {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+/*================*/
+/* FOOTER SETTING */
+/*================*/
+footer {
+	display: flex;
+	justify-content: space-between;
 }
