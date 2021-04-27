@@ -45,3 +45,11 @@ export function setBackend(reqBackend){
 		backend: reqBackend
 	}
 }
+
+// Set status action (start / stop)
+export function setStatus(reqStatus){
+	return {
+		type: "SET_STATUS",
+		status: reqStatus
+	}
+}

@@ -1,83 +1,86 @@
-/*
-// Query camera selection region
-const cameraOptions = document.querySelector('.video-options>select');
+import { setStatus } from "../actions";
+import { store } from "../store";
 
-// Query video element
-var video = document.getElementById('input_frame');
+class Camera {
 
-// Camera parameters
-const constraints = {
-	video: {
-		width: {
-			min: 480,
-			ideal: 480,
-			max: 1920,
-		},
-		height: {
-			min: 360,
-			ideal: 360,
-			max: 1080
-		},
+	constructor(width, height){
+
+		// Get Elements
+		this.cameraInput = document.getElementById("videoInput");
+		this.canvasInput = document.getElementById("canvasInput");
+		this.showInput = document.getElementById("showInput");
+		this.canvasInput.width = width;
+		this.canvasInput.height = height;
+		this.context = this.canvasInput.getContext('2d');
+		this.status = false;
+
+		// Bind method
+		this.clearFrame = this.clearFrame.bind(this);
+		this.takeFrame = this.takeFrame.bind(this);
+		this.run = this.run.bind(this);
+		this.stop = this.stop.bind(this);
+		this.render = this.render.bind(this);
+	}
+
+	// Clearing frame
+	clearFrame() {
+    	this.context.fillStyle = "#AAA";
+    	this.context.fillRect(0, 0, this.canvasInput.width, this.canvasInput.height);
+	    var data = this.canvasInput.toDataURL('image/png');
+    	this.showInput.setAttribute('src', data);
+	};
+
+	// Taking frame
+	takeFrame() {
+		this.context.drawImage(this.cameraInput, 0, 0, this.canvasInput.width, this.canvasInput.height);
+		if (this.status) {
+			var data = this.canvasInput.toDataURL('image/png');
+			this.showInput.setAttribute('src', data);
+		}	
+	};
+
+	// Running
+	run() {
+		// access video stream from webcam
+		navigator.mediaDevices.getUserMedia({
+			video:true,
+			audio:false
+		})
+		// on success, stream it in video tag
+		.then((stream) => {
+			this.cameraInput.srcObject = stream;
+			this.cameraInput.play();
+			this.status = true;
+			this.timerID = setInterval(this.takeFrame, 50);
+		})
+		.catch(function(err) {
+			console.log("An error occurred: " + err);
+			store.dispatch(setStatus("off"));
+		});
+	}
+
+	// Stopping
+	stop() {
+		if (this.status) {
+			clearInterval(this.timerID);
+			this.status = false;
+			const stream = this.cameraInput.srcObject;
+			const tracks = stream.getTracks();
+			tracks.forEach(function(track) {
+				track.stop();
+			});
+			this.cameraInput.srcObject = null;
+		}
+	}
+
+	// Rendering
+	render() {
+		if (this.status) {
+			this.status = false;
+		} else {
+			this.status = true;
+		}
 	}
 };
 
-// First of all => query all available cameras
-// Note: Disable due to issue
-const getCameraSelection = async () => {
-	const devices = await navigator.mediaDevices.enumerateDevices();
-	const videoDevices = devices.filter(device => device.kind === 'videoinput');
-	const options = videoDevices.map((videoDevice => {
-		return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
-	});
-	cameraOptions.innerHTML = options.join('');
-};
-
-
-// Stream handling
-const handleStream = (stream) => {
-	
-	// Step 1: Adding source for video elements
-	video.srcObject = stream;
-};
-
-// Update camera parameters & starting stream
-const startStream = async (updatedConstraints) => {
-	
-	// Step 1: Get a stream from mediaDevices libraries
-	const stream = await navigator.mediaDevices.getUserMedia(updatedConstraints);
-		
-	// Step 2: Handling this stream (show, get frame ...)
-	handleStream(stream);
-	
-};
-
-// Starting camera
-const startCamera = () => {
-	
-	// Step 1: Check mediaDevices libraries is supported or not ?
-	if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {
-		
-		// Case 1: It is supported
-		// Step 2: Get camera selector
-		//getCameraSelection();
-		
-		// Step 3: Update camera parameters
-		const updatedConstraints = {
-			...constraints,
-			deviceId: {
-				exact: cameraOptions.value
-			}
-		};
-		
-		// Step 4: Update camera parameters & starting stream
-		startStream(constraints);
-		
-	}
-	else {
-		console.log("Media Devices is not supported. Cannot open camera !!!");
-	}
-};
-
-
-// Export function
-export default startCamera;
+export default Camera;

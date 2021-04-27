@@ -191,43 +191,10 @@ export default (state, action) => {
 			break;
 		}
 		
-		// Case 6: Set colorspace
-		case "SET_COLORSPACE": {
-			
-			// Loop for all colorspace
-			switch (action.colorspace) {
-				
-				// RGB colorspace
-				case "rgb": {
-					break;
-				}
-				
-				// HSV colorspace
-				case "hsv": {
-					break;
-				}
-				
-				// I420 colorspace
-				case "i420": {
-					break;
-				}
-				
-				default: break;
-			}
-			
-			// Update colorspace field
-			return {
-				...state,
-				colorspace: action.colorspace
-			};
-			
-			break;
-		}
-		
-		// Case 7: Set Backend
+		// Case 6: Set Backend
 		case "SET_BACKEND": {
 			
-			// Loop for all colorspace
+			// Loop for all backend
 			switch (action.backend) {
 				
 				// Processing by CPU
@@ -252,6 +219,38 @@ export default (state, action) => {
 			break;
 		}
 		
+		// Case 7: Set Status
+		case "SET_STATUS": {
+			
+			// Loop for all colorspace
+			switch (action.status) {
+				
+				// Starting process
+				case "on": {
+					document.getElementById("startBtn").style.display = 'none';
+					document.getElementById("stopBtn").style.display = 'block';
+					break;
+				}
+				
+				// Stopping process
+				case "off": {
+					document.getElementById("startBtn").style.display = 'block';
+					document.getElementById("stopBtn").style.display = 'none';
+					break;
+				}
+				
+				default: break;
+			}
+			
+			// Update status field
+			return {
+				...state,
+				status: action.status
+			};
+			
+			break;
+		}
+
 		default: break;
 	}
 

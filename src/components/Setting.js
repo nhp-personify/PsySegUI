@@ -3,7 +3,7 @@ import React from 'react';
 
 // Actions Linkage
 import { store } from "../store";
-import { setSize, setFPS, setMode, setColorspace, setBackend } from "../actions";
+import { setSize, setFPS, setMode, setColorspace, setBackend, setStatus } from "../actions";
 
 // Render
 export class Setting extends React.Component {
@@ -38,6 +38,18 @@ export class Setting extends React.Component {
 		store.dispatch(setBackend(backend));
 	};
 	
+	// Dispatch for starting
+	dispatchStarting(e) {
+		const status = "on";
+		store.dispatch(setStatus(status));
+	}
+
+	// Dispatch for stopping
+	dispatchStopping(e) {
+		const status = "off";
+		store.dispatch(setStatus(status));
+	}
+
 	render() {
 		return (
 			<article className="setting">
@@ -70,7 +82,8 @@ export class Setting extends React.Component {
 					<option value="cpu">CPU</option>
 					<option value="gpu">GPU</option>
 				</select>
-				<button id="start">Start</button>	
+				<button id="startBtn" onClick={this.dispatchStarting}>Start</button>
+				<button id="stopBtn" onClick={this.dispatchStopping}>Stop</button>
 			</article>
 		)
 	}

@@ -9,7 +9,8 @@ const initialState = {
 	fps: "24",
 	colorspace: "rgb",
 	mode: "full",
-	backend: "cpu"
+	backend: "cpu",
+	status: "off"
 };
 
 // Store variable
